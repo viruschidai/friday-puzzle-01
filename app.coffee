@@ -1,5 +1,16 @@
-friday-puzzle-01
-================
+_ = require 'lodash'
+readline = require 'readline'
+
+###
+Cookie Clicker is a Javascript game by Orteil, where players click on a picture of a giant cookie.
+Clicking on the giant cookie gives them cookies.
+They can spend those cookies to buy buildings.
+Those buildings help them get even more cookies.
+Like this problem, the game is very cookie-focused.
+This problem has a similar idea, but it does not assume you have played Cookie Clicker.
+Please don't go play it now: it might be a long time before you come back.
+
+Problem
 
 In this problem, you start with 0 cookies.
 You gain cookies at a rate of 2 cookies per second.
@@ -36,3 +47,21 @@ C, F and X will each consist of at least 1 digit followed by 1 decimal point fol
 Output
 
 The function needs to return the total number of seconds required to get to X cookies.
+###
+
+exports.answer = (cost, increment, required) ->
+  return 0
+
+
+main = ->
+  rl = readline.createInterface
+    input: process.stdin,
+    output: process.stdout
+
+  rl.question 'Enter the cost of a cookie farm: ', (c) ->
+    rl.question 'Enter how many cookies get produces by each farm per second: ', (f) ->
+      rl.question 'Enter the total number of cookies required: ', (x) ->
+        console.log "Total time to get #{+x} cookies = #{exports.answer(+c, +f, +x)} sec."
+        rl.close()
+
+main()
