@@ -48,9 +48,30 @@ Output
 
 The function needs to return the total number of seconds required to get to X cookies.
 ###
+cache = {}
+
+exports.fTimeCostFarms = (n, cost, increment) ->
+  if n is 0 then return 0
+  if n is 1 then return cost / 2
+
+  if cache[n] then return cache[n]
+  t = exports.fTimeCostFarms(n-1, cost, increment) + cost / (2 + (n-1) * increment)
+  cache[n] = t
+  return t
+
+
+exports.fTime = (cost, increment, required, n) ->
+  if n is 0 then return required / 2
+  return exports.fTimeCostFarms(n, cost, increment) + (required / (2 + n * increment))
+
 
 exports.answer = (cost, increment, required) ->
-  return 0
+  cache = {}
+  n =0
+  while true
+    t1 = exports.fTime(cost, increment, required, n)
+    t2 = exports.fTime(cost, increment, required, n + 1)
+    if t2 >= t1 then return t1 else n++
 
 
 main = ->
