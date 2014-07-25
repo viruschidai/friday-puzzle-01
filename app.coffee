@@ -50,6 +50,7 @@ The function needs to return the total number of seconds required to get to X co
 ###
 cache = {}
 
+# Time take to create nth farm
 exports.fTimeCostFarms = (n, cost, increment) ->
   if n is 0 then return 0
   if n is 1 then return cost / 2
@@ -59,7 +60,7 @@ exports.fTimeCostFarms = (n, cost, increment) ->
   cache[n] = t
   return t
 
-
+# Time take if you need to build n farms
 exports.fTime = (cost, increment, required, n) ->
   if n is 0 then return required / 2
   return exports.fTimeCostFarms(n, cost, increment) + (required / (2 + n * increment))
@@ -68,6 +69,7 @@ exports.fTime = (cost, increment, required, n) ->
 exports.answer = (cost, increment, required) ->
   cache = {}
   n =0
+  # return time with n farms if n+1 farms take more time to reach the target than n farms
   while true
     t1 = exports.fTime(cost, increment, required, n)
     t2 = exports.fTime(cost, increment, required, n + 1)
